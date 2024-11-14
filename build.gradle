@@ -1,0 +1,18 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+application {
+    mainClass = 'sortvisualiser.MainApp'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.10'
+}

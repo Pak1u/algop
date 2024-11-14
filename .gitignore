@@ -1,0 +1,32 @@
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+.gradle
+.vscode/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+bin/
+.settings
+.classpath
+.project
+
+.idea/
+out/
+
+# Ignore common system and IDE folders
+Application Data/
+Cookies/
+Local Settings/
+My Documents/
+NetHood/
+PrintHood/
+Recent/
+SendTo/
+Start Menu/
+Templates/
+*.log
