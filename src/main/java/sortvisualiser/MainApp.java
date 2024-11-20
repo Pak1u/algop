@@ -1,6 +1,7 @@
 package sortvisualiser;
 
 import sortvisualiser.screens.MainMenuScreen;
+import sortvisualiser.screens.LoginScreen;
 import sortvisualiser.screens.Screen;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -57,9 +58,10 @@ public class MainApp {
     }
     
     public void start() {
-        pushScreen(new MainMenuScreen(this));
+        pushScreen(new LoginScreen(this));  // Show login screen first
         window.pack();
     }
+    
     
     public static void main(String... args) {
         System.setProperty("sun.java2d.opengl", "true");
