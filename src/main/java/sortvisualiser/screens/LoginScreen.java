@@ -1,6 +1,7 @@
 package sortvisualiser.screens;
 
 import sortvisualiser.MainApp;
+import sortvisualiser.SessionManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,29 +17,66 @@ public class LoginScreen extends Screen {
     }
     
     private void setUpGUI() {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BorderLayout());
         setBackground(Color.DARK_GRAY);
+        
+        JPanel formPanel = new JPanel();
+        formPanel.setLayout(new GridBagLayout());
+        formPanel.setBackground(Color.DARK_GRAY);
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.WEST;
+        
+        JLabel headingLabel = new JLabel("LOGIN");
+        headingLabel.setForeground(Color.WHITE);
+        headingLabel.setFont(new Font("Arial", Font.BOLD, 36));
+        headingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        JPanel headingPanel = new JPanel();
+        headingPanel.setBackground(Color.DARK_GRAY);
+        headingPanel.add(headingLabel);
         
         JLabel usernameLabel = new JLabel("Username:");
         usernameLabel.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formPanel.add(usernameLabel, gbc);
+        
         usernameField = new JTextField(20);
+        gbc.gridx = 1;
+        formPanel.add(usernameField, gbc);
         
         JLabel passwordLabel = new JLabel("Password:");
         passwordLabel.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formPanel.add(passwordLabel, gbc);
+        
         passwordField = new JPasswordField(20);
+        gbc.gridx = 1;
+        formPanel.add(passwordField, gbc);
         
         JButton loginButton = new JButton("Login");
+        loginButton.setPreferredSize(new Dimension(100, 40));
         loginButton.addActionListener(this::loginAction);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        formPanel.add(loginButton, gbc);
         
         JButton signupButton = new JButton("Sign Up");
+        signupButton.setPreferredSize(new Dimension(100, 40));
         signupButton.addActionListener(e -> app.pushScreen(new SignupScreen(app)));
+        gbc.gridy = 3;
+        formPanel.add(signupButton, gbc);
         
-        add(usernameLabel);
-        add(usernameField);
-        add(passwordLabel);
-        add(passwordField);
-        add(loginButton);
-        add(signupButton);
+        JPanel containerPanel = new JPanel(new BorderLayout());
+        containerPanel.setBackground(Color.DARK_GRAY);
+        containerPanel.add(headingPanel, BorderLayout.NORTH);
+        containerPanel.add(formPanel, BorderLayout.CENTER);
+        
+        add(containerPanel, BorderLayout.CENTER);
     }
     
     private void loginAction(ActionEvent e) {
@@ -54,13 +92,14 @@ public class LoginScreen extends Screen {
             ResultSet result = statement.executeQuery();
             
             if (result.next()) {
-                // Successful login
+                // Set session for logged-in user
+                SessionManager.setLoggedInUser(username);
+                
+                // Navigate to the MainMenuScreen
                 app.pushScreen(new MainMenuScreen(app));
             } else {
-                // Invalid credentials
                 JOptionPane.showMessageDialog(this, "Invalid username or password.");
             }
-            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -68,7 +107,6 @@ public class LoginScreen extends Screen {
 
     @Override
     public void onOpen() {
-        // Reset form when screen is opened
         usernameField.setText("");
         passwordField.setText("");
     }

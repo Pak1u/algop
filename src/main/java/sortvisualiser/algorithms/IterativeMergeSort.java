@@ -1,22 +1,12 @@
 package sortvisualiser.algorithms;
 import sortvisualiser.SortArray;
 
-/**
- * Iterative Merge sort implementation
- *
- * @author Randy Bushman
- */
+
 public class IterativeMergeSort implements ISortAlgorithm
 {
 	private long stepDelay = 5;
 	
-	/**
-	 * This is an implementation of Merge Sort using Iteration instead of Recursion.
-	 * It works by splitting the array into small subsequences. These subsequences are
-	 * then merged into larger sorted arrays. In the end, there will be one big sorted array.
-	 * @param array the array to be sorted
-	 * @see SortArray
-	 */
+
 	@Override
 	public void runSort(SortArray array) 
 	{
@@ -25,14 +15,6 @@ public class IterativeMergeSort implements ISortAlgorithm
 				merge(array, k, exp);
 	}
 	
-	/**
-	 * Returns a subsequence of the array taken from input. The original array is cut starting
-	 * from start, and ending at end.
-	 * @param array Given array to cut
-	 * @param start The starting position of the subsequence (inclusive)
-	 * @param end The ending position of the subsequence (exclusive)
-	 * @return The requested subsequence of the array
-	 */
 	private int[] getSubArray(SortArray array, int start, int end)
 	{
 		int size = end - start;
@@ -42,12 +24,7 @@ public class IterativeMergeSort implements ISortAlgorithm
 		return arr;
 	}
 	
-	/**
-	 * Merges two sorted subsequences of the array into one big sorted subsequence
-	 * @param arr The array being sorted
-	 * @param start The start of the subsequence
-	 * @param exp The current exponent, and the size of the subsequences
-	 */
+	
 	private void merge(SortArray arr, int start, int exp)
 	{
 		int s = start;

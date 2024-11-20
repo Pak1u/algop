@@ -9,10 +9,6 @@ import javax.swing.JPanel;
 
 import sortvisualiser.MainApp;
 
-/**
- * 
- * @author mhops
- */
 public abstract class Screen extends JPanel {
     protected MainApp app;
     

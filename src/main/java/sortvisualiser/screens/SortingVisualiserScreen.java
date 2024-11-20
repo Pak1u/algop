@@ -10,21 +10,12 @@ import sortvisualiser.MainApp;
 import sortvisualiser.SortArray;
 import sortvisualiser.algorithms.ISortAlgorithm;
 
-/**
- * The main class for the sort visualiser GUI
- *
- * @author Matt Hopson
- */
+
 public final class SortingVisualiserScreen extends Screen {
     private final SortArray sortArray;
     private final ArrayList<ISortAlgorithm> sortQueue;
 
-    /**
-     * Creates the GUI
-     * @param algorithms List of algorithms to run for visualisation
-     * @param playSounds Whether or not you want the algorithm to play sounds
-     * @param app The main application
-     */
+   
     public SortingVisualiserScreen(ArrayList<ISortAlgorithm> algorithms, boolean playSounds, MainApp app) {
         super(app);
         setLayout(new BorderLayout());
@@ -48,8 +39,6 @@ public final class SortingVisualiserScreen extends Screen {
     }
     
     public void onOpen() {
-        //This would block the EventDispatchThread, and so
-        //it must run on a worker thread
         SwingWorker<Void, Void> swingWorker = new SwingWorker<Void,Void>() {
             @Override
             protected Void doInBackground() throws Exception {

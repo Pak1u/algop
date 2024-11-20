@@ -1,11 +1,7 @@
 package sortvisualiser.algorithms;
 import sortvisualiser.SortArray;
 
-/**
- * Counting Sort implementation
- *
- * @author Randy Bushman
- */
+
 public class CountingSort implements ISortAlgorithm
 {
 	private long stepDelay = 5;
@@ -30,12 +26,7 @@ public class CountingSort implements ISortAlgorithm
 
 	@Override
 	
-	/**
-	 * This is an implementation of a stable version of Counting Sort. 
-	 * It counts every instance of every number and adds them back in order.
-	 *
-	 * @param array the array to be sorted
-	 */	
+	
 	public void runSort(SortArray array)
 	{
 		int[] result = new int[array.arraySize()];

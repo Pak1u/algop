@@ -6,11 +6,9 @@ import sortvisualiser.screens.Screen;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import java.awt.*;
+import javax.swing.*;
 
-/**
- * The main application point for controlling the program
- * @author Matthew Hopson
- */
 public class MainApp {
     private final JFrame window;
     
@@ -23,8 +21,12 @@ public class MainApp {
         screens = new ArrayList<>();
         window = new JFrame ("Sort visualiser");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Image icon = Toolkit.getDefaultToolkit().getImage("path/to/icon.png");
+        // window.setIconImage(icon);
         window.setVisible(true);
     }
+
+
     
     public Screen getCurrentScreen() {
         return screens.get(screens.size() - 1);

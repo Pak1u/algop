@@ -20,13 +20,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import sortvisualiser.MainApp;
+import sortvisualiser.SessionManager; // Make sure SessionManager is imported
 import sortvisualiser.algorithms.*;
 
-
-/**
- *
- * @author Matthew Hopson
- */
 public final class MainMenuScreen extends Screen {
     private static final Color BACKGROUND_COLOUR = Color.DARK_GRAY;
     private final ArrayList<AlgorithmCheckBox> checkBoxes;
@@ -49,7 +45,6 @@ public final class MainMenuScreen extends Screen {
     private void initContainer(JPanel p) {
         p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
         p.setBackground(BACKGROUND_COLOUR);
-        //p.setBorder(BorderFactory.createLineBorder(Color.WHITE));
     }
     
     public void setUpGUI() {
@@ -103,7 +98,7 @@ public final class MainMenuScreen extends Screen {
                     algorithms.add(cb.getAlgorithm());
                 }
             }
-             app.pushScreen(
+            app.pushScreen(
                 new SortingVisualiserScreen(
                             algorithms, 
                             soundCheckBox.isSelected(), 
@@ -112,8 +107,20 @@ public final class MainMenuScreen extends Screen {
         });
         startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         
+        // Logout Button
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        logoutButton.addActionListener((ActionEvent e) -> {
+            // Clear session when logging out
+            SessionManager.logout();
+            
+            // Navigate back to LoginScreen
+            app.pushScreen(new LoginScreen(app));
+        });
+        
+        // Add the logout button after the start button
         outerContainer.add(optionsContainer);
-        outerContainer.add(Box.createRigidArea(new Dimension(5,0)));
+        outerContainer.add(Box.createRigidArea(new Dimension(5, 0)));
         outerContainer.add(sortAlgorithmContainer);
         
         int gap = 15;
@@ -121,15 +128,15 @@ public final class MainMenuScreen extends Screen {
         add(outerContainer);
         add(Box.createRigidArea(new Dimension(0, gap)));
         add(startButton);
+        add(Box.createRigidArea(new Dimension(0, gap)));
+        add(logoutButton);  // Add logout button to the layout
     }
 
     @Override
     public void onOpen() {
         checkBoxes.forEach((box) -> {
             box.unselect();
-            
         });
-
     }
     
     private class AlgorithmCheckBox {
@@ -145,7 +152,6 @@ public final class MainMenuScreen extends Screen {
         public void unselect() {
             box.setSelected(false);
         }
-     
         
         public boolean isSelected() {
             return box.isSelected();
@@ -155,5 +161,4 @@ public final class MainMenuScreen extends Screen {
             return algorithm;
         }
     }
-    
 }
